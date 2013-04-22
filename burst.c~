@@ -20,7 +20,7 @@ int main(void)
   //
   while(1)
   {
-    loop_until_bit_is_set(PINB,TTL); //wait for PIV synchronization
+    //loop_until_bit_is_set(PINB,TTL); //wait for PIV synchronization
     for(i=0;i<5;++i)
       {//burst
 	LED_PORT|=_BV(LED);//LED on
