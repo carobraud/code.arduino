@@ -1,0 +1,51 @@
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <util/delay.h>
+#include <avr/io.h>
+
+//anolog in
+//C0-5=0-5
+//digital in/out
+//Di=i [0-7]
+//B0=8, B1=9, B2=10, B3=11, B4=12, B5=13 [! B6&7 crystal !!]
+#define LED_DDR  DDRB
+#define LED_PORT PORTB
+#define LED1     PORTB4
+#define LED2     PORTB3
+
+#define TTL_DDR  DDRD
+#define TTL_PORT PORTD
+#define TTL1     PORTD0
+#define TTL2     PORTD1
+
+//TTL1 out v -> TTL2 in . => LED1 on/off _
+//loop LED2 on&off v
+int main(void)
+{
+  unsigned char ttl;
+  unsigned char ttl2;
+  TTL_DDR|=_BV(TTL1);//TTL output
+  TTL_DDR&=~_BV(TTL2);//TTL input
+  LED_DDR|=_BV(LED1)|_BV(LED2);//LED output
+  while(1)
+  {
+//RED
+    TTL_PORT|=_BV(TTL1);//R on
+    LED_PORT&=~_BV(LED1);//O off
+    LED_PORT&=~_BV(LED2);//G off
+    _delay_ms(5000);
+//GREEN
+    TTL_PORT&=~_BV(TTL1);//R off
+    LED_PORT&=~_BV(LED1);//O off
+    LED_PORT|=_BV(LED2);//G on
+    _delay_ms(3000);
+//ORANGE
+    TTL_PORT&=~_BV(TTL1);//R off
+    LED_PORT|=_BV(LED1);//O on
+    LED_PORT&=~_BV(LED2);//G off
+    _delay_ms(1000);
+  }
+  return (0);
+}
+

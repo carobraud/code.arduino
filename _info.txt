@@ -1,0 +1,49 @@
+#AVRdude (v5.10 have Arduino programmer)
+tar xzf avrdude-5.10.tar.gz
+cd avrdude-5.10
+./configure
+make
+cd ..
+
+#edit
+gedit Blink.c
+
+#compile and load
+make clean; make; make upload; make size
+
+exit
+
+#AVRdude
+su
+cp -p ./arduino-0022/hardware/tools/avrdude.conf /etc/avrdude.conf
+
+#PDE
+cp -p arduino-0017/hardware/cores/arduino/Makefile .
+cp -p arduino-0022/examples/1.Basics/Blink/Blink.pde .
+
+#C
+#cat OpenSilicium 2 magasine > Makefile
+#cat OpenSilicium 2 magasine > Blink.c
+make clean; make
+make upload
+
+
+#Arduino Uno
+##backup
+./avrdude-5.10/avrdude -C ./avrdude-5.10/avrdude.conf -F -V -c arduino -p ATMEGA328P -P /dev/ttyACM0 -b 115200 -U flash:r:flash_backup.hex:i
+mv flash_backup.hex ArduinoUno_flash_backup.hex.v0.0.0
+
+##compile
+avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o led.o BlinkUno.c
+avr-gcc -mmcu=atmega328p led.o -o led
+avr-objcopy -O ihex -R .eeprom led led.hex
+./avrdude-5.10/avrdude -C ./avrdude-5.10/avrdude.conf -F -V -c arduino -p atmega328p -P /dev/ttyACM0 -b 115200 -U flash:w:led.hex
+
+##Makefile
+make clean; make; make upload; make size
+
+#Arduino Mega 2560
+##backup
+./avrdude-5.10/avrdude -C ./avrdude-5.10/avrdude.conf -F -V -c arduino -p ATMEGA2560 -P /dev/ttyACM0 -b 115200 -U flash:r:flash_backup.hex:i
+mv flash_backup.hex ArduinoMega2560_flash_backup.hex.v0.0.0
+

@@ -1,0 +1,29 @@
+#AVRdude (v5.10 have Arduino programmer)
+tar xzf avrdude-5.10.tar.gz
+cd avrdude-5.10
+./configure
+make
+cd ..
+
+#edit
+gedit Blink.c
+
+#compile and load
+make clean; make; make upload; make size
+
+exit
+
+#AVRdude
+su
+cp -p ./arduino-0022/hardware/tools/avrdude.conf /etc/avrdude.conf
+
+#PDE
+cp -p arduino-0017/hardware/cores/arduino/Makefile .
+cp -p arduino-0022/examples/1.Basics/Blink/Blink.pde .
+
+#C
+#cat OpenSilicium 2 magasine > Makefile
+#cat OpenSilicium 2 magasine > Blink.c
+make clean; make
+make upload
+

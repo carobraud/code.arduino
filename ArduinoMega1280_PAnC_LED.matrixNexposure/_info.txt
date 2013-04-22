@@ -1,0 +1,10 @@
+#resize
+for f in *_gl.jpg; do convert -resize 25% $f -depth 8 `basename $f .jpg`.z0.25.png; done
+
+#xirtam on LEDmatrix  (x)
+echo LEDmatrix_00000.png LEDmatrix_00004.png calibration.png | ~/dataseb/code.CImg/CImg.Program/xirtam/CImg.xirtam -i stdin -c calibration.png --mean-size 1
+
+#xirtam on LEDmatrix2 (v)
+echo LEDmatrix2_*.png|~/dataseb/code.CImg/CImg.Program/xirtam/CImg.xirtam -i stdin -c calibration2.png --mean-size 9
+echo LEDmatrix2_*.png|~/dataseb/code.CImg/CImg.Program/xirtam/CImg.xirtam -i stdin -C file -c calibration2.cimg --mean-size 9
+

@@ -1,0 +1,30 @@
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <util/delay.h>
+#include <avr/io.h>
+
+#define LED_DDR  DDRB
+#define LED_PORT PORTB
+#define LED1     PORTB3
+#define LED2     PORTB4
+
+int main(void)
+{
+  LED_DDR|=_BV(LED1)|_BV(LED2);//LED output
+  while(1)
+  {
+    LED_PORT|=_BV(LED1);//LED on
+    _delay_ms(50);
+    LED_PORT&=~_BV(LED1);//LED off
+    LED_PORT|=_BV(LED2);//LED on
+    _delay_ms(50);
+    LED_PORT|=_BV(LED2);//LED on
+    _delay_ms(50);
+    LED_PORT&=~_BV(LED1);//LED off
+    LED_PORT&=~_BV(LED2);//LED off
+    _delay_ms(1000);
+  }
+  return (0);
+}
+

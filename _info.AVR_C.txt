@@ -1,0 +1,44 @@
+_ get ATMEGA mapping pins
+
+http://chromiteblue.com/Projects/AVR_Toolchain/man/index.php?command=bit_is_clear
+
+        #include <avr/io.h>
+bit_is_clear(sfr, bit)
+bit_is_set(sfr, bit)
+
+loop_until_bit_is_clear(sfr, bit)
+loop_until_bit_is_set(sfr, bit)
+
+
+http://www.societyofrobots.com/robotforum/index.php?topic=9947.0
+
+if (PIND & 0b10000000) 
+
+if(bit_is_clear(PIND,0))   //if pin D0 is grounded...
+{
+//pin D0 is grounded!
+}
+
+  if (PIND&0){
+        PORTD|=B00000100;
+      else{
+        PORTD|=B00000000;
+      }
+
+
+#define BIT_SET(REG, bit)                    ( REG |= (1UL << (bit) ) )
+
+#define BIT_CLR(REG, bit)                    ( REG &= ~(1UL << (bit) ) )
+
+#define BIT_TST(REG, bit, val)              ( ( (REG & (1UL << (bit) ) ) == ( (val) << (bit) ) ) )
+
+    if ( BIT_TST( PIND, 0, 1 ) )
+        {
+        BIT_SET( PORTD, 2);
+        } 
+    else
+        {
+        BIT_CLR( PORTD, 2);
+        }
+
+

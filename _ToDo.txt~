@@ -1,0 +1,13 @@
+#soon
+. move to matrixi (git)
+_ wait for external trigger (i.e. digital input)
+. test 8 bit portB
+  v main.hex.ArduinoMega1280_PB_direct_LED_plugged -> main.hex.v0.4.1 (.c, map)
+  . doc (photo v, gimp v, doc _)
+
+#then
+_ C++
+
+#later
+_ wait for external trigger (i.e. digital input)
+

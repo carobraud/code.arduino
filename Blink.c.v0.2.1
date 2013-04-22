@@ -1,0 +1,23 @@
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <util/delay.h>
+#include <avr/io.h>
+
+#define LED_DDR  DDRB
+#define LED_PORT PORTB
+//ArduinoMega pin 53-50,10-13 = PB0-7
+//16 bit = 2x8bit = PORTA and PORTC
+
+int main(void)
+{
+  unsigned char value=0;
+  LED_DDR=255;//LED.matrix output
+  while(1)
+  {
+    LED_PORT=value++;//LED.matrix set and then increment
+    _delay_ms(1000);
+  }
+  return (0);
+}
+
