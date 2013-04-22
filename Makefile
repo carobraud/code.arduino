@@ -1,11 +1,21 @@
+<<<<<<< HEAD:Makefile
 MCU = atmega2560
+=======
+MCU = atmega328p
+>>>>>>> 9f08298ab01f2f3be98119d69471cdbc3fff08e0:Makefile
 TARGET_ARCH = -mmcu=$(MCU)
 TARGET = main
 CC = avr-gcc
 CPPFLAGS = -mmcu=$(MCU)
+<<<<<<< HEAD:Makefile
 CFLAGS = -Os -g -Wall -I. -DF_CPU=16000000
 LDFLAGS = -g -mmcu=$(MCU) -lm -Wl,--gc-sections -Os
 PGMER = -c stk500v2 -b 115200 -P /dev/ttyACM0
+=======
+CFLAGS = -Os -g -Wall -I. -DF_CPU=16000000UL
+LDFLAGS = -g -mmcu=$(MCU) -lm -Wl,--gc-sections -Os
+PGMER = -c arduino -b 115200 -P /dev/ttyACM0
+>>>>>>> 9f08298ab01f2f3be98119d69471cdbc3fff08e0:Makefile
 #DUDE = /usr/bin/avrdude -V -p $(MCU)
 DUDE = ./avrdude-5.10/avrdude -C ./avrdude-5.10/avrdude.conf -p $(MCU)
 
